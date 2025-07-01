@@ -1,1 +1,0 @@
-export PATH="/c/Users/hp/AppData/Local/Programs/Python/Python312:/c/Users/hp/AppData/Local/Programs/Python/Python312/Scripts:$PATH" 

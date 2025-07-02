@@ -7,8 +7,9 @@ import os
 import pandas as pd
 from config import config
 from utils.read_write import read_json_file
-import codecs
+from utils.safe_update_dict import safe_update_dict
 import json
+from investing_scraper.investing_variables import investing_variables
 
 
 class InvestingDataScraper:
@@ -28,24 +29,21 @@ class InvestingDataScraper:
         return None
 
 
-    async def _fetch_table(self, page_name, time_range: str = "today"):
+    async def _fetch_table(self, page_name, payload_update: dict = {}):
         """Fetch and parse the webpage asynchronously"""
         logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')
-        if time_range not in ["today", "thisWeek"]:
-            logger.warning(f"Invalid time range: {time_range}")
-            return None
-        request_json['data']['currentTab'] = time_range
+        safe_update_dict(request_json["payload"], payload_update)
         
         async with aiohttp.ClientSession() as session:
-            async with session.post(request_json['url'], headers=self.headers, data=request_json['data']) as response:
+            async with session.post(request_json['url'], headers=self.headers, data=request_json["payload"]) as response:
                 if response.status != 200:
                     logger.error(f"Failed to fetch page. Status code: {response.status}")
                     return None
                 try:
                     json_response = await response.read()
-                    table_html = json.loads(json_response).get('data', '') 
-                    logger.debug(f"Successfully fetched table data for {page_name}")
+                    table_html = json.loads(json_response).get("data", '') 
+
                     return table_html
                 except Exception as e:
                     logger.error(f"Error parsing JSON: {str(e)}")
@@ -107,14 +105,13 @@ class InvestingDataScraper:
             os.makedirs(output_dir)
         df = pd.DataFrame(data)
         df.to_csv(os.path.join(output_dir, f"{page_name}_{date}.csv"), index=False)
-        logger.debug(f"Saved data to {os.path.join(output_dir, f'{page_name}_{date}.csv')}")
 
 
 
 
     
-    async def run(self, page_name, time_range, save_data):
-        table_html = await self._fetch_table(page_name, time_range)
+    async def run(self, page_name, payload_update: dict = {}, save_data: bool = False):
+        table_html = await self._fetch_table(page_name, payload_update)
         if not table_html:
             logger.error(f"Failed to fetch table data for {page_name}")
             return None

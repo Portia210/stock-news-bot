@@ -1,5 +1,5 @@
 from utils.logger import logger
-from utils.caller_info import get_caller_info
+from utils.caller_info import get_function_and_caller_info
 
 def safe_update_dict(original_dict, update_dict, prevent_type_mismatch: bool = True):
     """
@@ -20,13 +20,11 @@ def safe_update_dict(original_dict, update_dict, prevent_type_mismatch: bool = T
                 safe_update_dict(original_dict[key], value)
             # if they are not the same type (any type), don't update
             elif prevent_type_mismatch and type(value) is not type(original_dict[key]):
-                caller_info = get_caller_info()
-                logger.warning(f"Preventing update for key {key} because types are different: original: {type(original_dict[key])} VS update: {type(value)} (function called at {caller_info})")
+                logger.warning(f"Preventing update for key {key} because types are different: original: {type(original_dict[key])} VS update: {type(value)} ({get_function_and_caller_info()})")
             else:
                 original_dict[key] = value
         else:
-            caller_info = get_caller_info()
-            logger.warning(f"Key {key} not found in original dictionary, ignoring it (function called at {caller_info})")
+            logger.warning(f"Key {key} not found in original dictionary, ignoring it ({get_function_and_caller_info()})")
     return original_dict
 
 

@@ -1,7 +1,7 @@
 {
     "url": "https://il.investing.com/holiday-calendar/Service/getCalendarFilteredData",
     "method": "post",
-    "data": {
+    "payload": {
         "country[]": "5",
         "timeZone": "17",
         "timeFilter": "timeOnly",

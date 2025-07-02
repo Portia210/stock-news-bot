@@ -1,4 +1,4 @@
-from utils.logger_config import logger
+from utils.logger import logger
 
 def view_permissions(guild):
     permissions = guild.me.guild_permissions

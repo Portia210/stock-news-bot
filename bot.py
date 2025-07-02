@@ -2,7 +2,7 @@ import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from utils.logger_config import logger
+from utils.logger import logger
 import asyncio
 
 # Load environment variables
@@ -29,9 +29,10 @@ async def on_ready():
         await bot.sync_commands()
         logger.info("Commands synced successfully!")
         # Print the available slash commands for debugging
-        slash_commands = bot.application_commands
-        logger.info(f"Available slash commands: {len(slash_commands)}")
-
+        slash_commands = [cmd.name for cmd in bot.application_commands]
+        text_commands = [cmd.name for cmd in bot.commands]
+        logger.info(f"Available slash commands: {slash_commands}")
+        logger.info(f"Available text commands: {text_commands}")
     except Exception as e:
         logger.error(f"Failed to sync commands: {e}")
 

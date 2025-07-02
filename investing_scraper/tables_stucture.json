@@ -1,0 +1,45 @@
+{
+    "economic_calendar": {   
+        "is_date_inline": true,
+        "date_format": "%A, %B %#d, %Y",
+        "table_selectors": {
+            "date": {"selector": "td.theDay", "attribute": ["text"]},
+            "time": {"selector": "td.first", "attribute": ["text"]},
+            "country": {"selector": "td.flagCur > span", "attribute": ["title"]},
+            "volatility": {"selector": "td.sentiment", "attribute": ["title", "text"]},
+            "description": {"selector": "td.event", "attribute": ["text"]},
+            "actual": {"selector": "td.act", "attribute": ["text"]},
+            "forecast": {"selector": "td.fore", "attribute": ["text"]},
+            "previous": {"selector": "td.prev", "attribute": ["text"]}
+        }
+    },
+    "earnings_calendar": {   
+        "is_date_inline": false,
+        "date_format": "%A, %B %#d, %Y",
+        "table_selectors": {
+            "date": {"selector": "td.theDay", "attribute": ["text"]},
+            "country": {"selector": "td.flag > span", "attribute": ["title"]},
+            "company_name": {"selector": "td.earnCalCompany > span.earnCalCompanyName", "attribute": ["text"]},
+            "company_ticker": {"selector": "td.earnCalCompany > a", "attribute": ["text"]},
+ 
+            "eps": {"selector": "td:nth-child(3)", "attribute": ["text"]},
+            "eps_forcast": {"selector": "td:nth-child(4)", "attribute": ["text"]},
+            "revenue": {"selector": "td:nth-child(5)", "attribute": ["text"]},
+            "revenue_forcast": {"selector": "td:nth-child(6)", "attribute": ["text"]},
+            "company_mkcap": {"selector": "td:nth-child(7)", "attribute": ["text"]},
+            "time": {"selector": "td.time span", "attribute": ["data-tooltip"]}
+
+        }
+    },
+    
+    "holiday_calendar": {
+        "is_date_inline": false,
+        "date_format": "%B %#d, %Y",
+        "table_selectors": {
+            "date": {"selector": "td.date", "attribute": ["text"]},
+            "country": {"selector": "td.cur > a", "attribute": ["text"]},
+            "exchange_name": {"selector": "td:nth-child(3)", "attribute": ["text"]},
+            "holiday": {"selector": "td.last", "attribute": ["text"]}
+        }
+    }
+}

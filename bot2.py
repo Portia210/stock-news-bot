@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
-from utils.logger_config import setup_logger
+from utils.logger import setup_logger
 from config import config
 
 
@@ -30,11 +30,11 @@ async def on_ready():
     await channel.send(f'bot is ready! {admin_user.mention}!\nAvailable commands: {[cmd.name for cmd in bot.application_commands]}')
     
     # Sync slash commands with Discord
-    try:
-        await bot.sync_commands()
-        print("Commands synced successfully!")
-    except Exception as e:
-        print(f"Failed to sync commands: {e}")
+    # try:
+    #     await bot.sync_commands()
+    #     print("Commands synced successfully!")
+    # except Exception as e:
+    #     print(f"Failed to sync commands: {e}")
     
     # print the available commands
     print(f'Available commands: {[cmd.name for cmd in bot.application_commands]}')
@@ -55,9 +55,9 @@ async def test(ctx: discord.ApplicationContext):
     await ctx.respond(f'test command')
 
 
-@bot.slash_command(name="noise", description="Make noise")
-async def make_noise(ctx: discord.ApplicationContext):
-    await ctx.respond(f'noise')
+# @bot.slash_command(name="noise", description="Make noise")
+# async def make_noise(ctx: discord.ApplicationContext):
+#     await ctx.respond(f'noise')
 
 @bot.command(name="regular", description="Regular command")
 async def regular(ctx):

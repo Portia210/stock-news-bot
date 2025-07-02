@@ -1,0 +1,9 @@
+Channel: twitter-news
+Exported: 2025-07-02 16:03:39
+Messages from last 24 hours
+Filtered by users: 1 users
+==================================================
+
+[2025-07-01 20:50:22] python_bot: Pong! Latency: 183ms
+[2025-07-01 21:14:17] python_bot: Pong! Latency: 147ms
+[2025-07-01 21:14:26] python_bot: test command

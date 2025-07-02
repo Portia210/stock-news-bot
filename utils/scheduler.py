@@ -1,6 +1,6 @@
 import asyncio
 from datetime import datetime, time, timedelta
-from utils.logger_config import logger
+from utils.logger import logger
 from utils.message_handler import get_message_handler
 
 class TaskScheduler:

@@ -1,0 +1,12 @@
+{
+    "url": "https://il.investing.com/earnings-calendar/Service/getCalendarFilteredData",
+    "method": "post",
+    "data": {
+        "country[]": "5",
+        "timeZone": "17",
+        "timeFilter": "timeOnly",
+        "currentTab": "thisWeek",
+        "submitFilters": "1",
+        "limit_from": "0"
+    }
+}

@@ -71,11 +71,19 @@ async def process_and_send_news_report():
         
         # Step 3: Generate PDF report
         logger.info("📄 Generating PDF report...")
+        
+        # Determine report time based on current hour
+        from datetime import datetime
+        current_hour = datetime.now().hour
+        report_time = 'morning' if 6 <= current_hour < 18 else 'evening'
+        logger.info(f"🌅 Using {report_time} theme (current hour: {current_hour})")
+        
         await generate_pdf_report(
             input_json="news_pdf/news_data.json", 
             template_file="news_pdf/template.html", 
             output_file="news_pdf/output.html", 
-            pdf_file="news_pdf/output.pdf"
+            pdf_file="news_pdf/output.pdf",
+            report_time=report_time
         )
         
         # Step 4: Send report to Discord channel

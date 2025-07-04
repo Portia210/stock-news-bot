@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Test</title>
+    <!-- Main styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Theme overrides -->
+    <link rel="stylesheet" href="morning.css" id="morning-theme">
+    <link rel="stylesheet" href="evening.css" id="evening-theme" disabled>
+    <style>
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        .theme-switcher button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switcher">
+        <div>Current Theme: <span id="current-theme">Auto</span></div>
+        <button onclick="setTheme('morning')">Morning Theme</button>
+        <button onclick="setTheme('evening')">Evening Theme</button>
+        <button onclick="setTheme('auto')">Auto (Time-based)</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="theme-icon" id="theme-icon">☀️</div>
+                <div class="header-text">
+                    <h1>דוח חדשות</h1>
+                    <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-time">14:30</div>
+                    <a href="#" class="news-link">צפה במקור</a>
+                </div>
+                <div class="news-message">זהו טקסט לדוגמה לבדיקת התצוגה של העיצוב. הטקסט הזה יראה שונה בערכת הנושא של הבוקר לעומת ערכת הנושא של הערב.</div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-time">15:45</div>
+                    <a href="#" class="news-link">צפה במקור</a>
+                </div>
+                <div class="news-message">עוד דוגמה של חדשות עם קישור למקור. העיצוב צריך להיות נוח לקריאה בשני המצבים.</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>נוצר ב- <span id="generation-time"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            const morningTheme = document.getElementById('morning-theme');
+            const eveningTheme = document.getElementById('evening-theme');
+            const currentThemeSpan = document.getElementById('current-theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (theme === 'auto') {
+                const now = new Date();
+                const hour = now.getHours();
+                
+                if (hour >= 6 && hour < 18) {
+                    theme = 'morning';
+                } else {
+                    theme = 'evening';
+                }
+            }
+            
+            if (theme === 'morning') {
+                morningTheme.disabled = false;
+                eveningTheme.disabled = true;
+                document.body.setAttribute('data-theme', 'morning');
+                currentThemeSpan.textContent = 'Morning';
+                themeIcon.textContent = '☀️';
+            } else if (theme === 'evening') {
+                morningTheme.disabled = true;
+                eveningTheme.disabled = false;
+                document.body.setAttribute('data-theme', 'evening');
+                currentThemeSpan.textContent = 'Evening';
+                themeIcon.textContent = '🌙';
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTheme('auto');
+            document.getElementById('generation-time').textContent = new Date().toLocaleString();
+        });
+    </script>
+</body>
+</html> 

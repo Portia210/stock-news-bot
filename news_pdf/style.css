@@ -31,6 +31,28 @@ body {
     direction: rtl;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row-reverse;
+}
+
+.theme-icon {
+    font-size: 3rem;
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+.theme-icon:hover {
+    transform: scale(1.1);
+}
+
+.header-text {
+    text-align: center;
+}
+
 .header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
@@ -126,6 +148,14 @@ body {
 @media (max-width: 768px) {
     .header h1 {
         font-size: 2rem;
+    }
+    
+    .header-content {
+        gap: 15px;
+    }
+    
+    .theme-icon {
+        font-size: 2.5rem;
     }
     
     .content {

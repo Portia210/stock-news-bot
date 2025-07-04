@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Report</title>
+    <!-- Main styles -->
     <link rel="stylesheet" href="style.css">
+    <!-- Theme overrides -->
+    <link rel="stylesheet" href="morning.css" id="morning-theme">
+    <link rel="stylesheet" href="evening.css" id="evening-theme" disabled>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>דוח חדשות</h1>
-            <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+            <div class="header-content">
+                <div class="theme-icon" id="theme-icon">☀️</div>
+                <div class="header-text">
+                    <h1>דוח חדשות</h1>
+                    <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+                </div>
+            </div>
         </div>
         
         <div class="content">
@@ -27,6 +36,45 @@
     <script>
         // This will be populated by the Python script
         const newsData = {{NEWS_DATA}};
+        const reportTime = "{{REPORT_TIME}}"; // morning or evening
+        
+        function setTheme() {
+            const morningTheme = document.getElementById('morning-theme');
+            const eveningTheme = document.getElementById('evening-theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (reportTime === 'morning') {
+                // Morning theme
+                morningTheme.disabled = false;
+                eveningTheme.disabled = true;
+                document.body.setAttribute('data-theme', 'morning');
+                themeIcon.textContent = '☀️';
+            } else if (reportTime === 'evening') {
+                // Evening theme
+                morningTheme.disabled = true;
+                eveningTheme.disabled = false;
+                document.body.setAttribute('data-theme', 'evening');
+                themeIcon.textContent = '🌙';
+            } else {
+                // Auto-detect based on current time
+                const now = new Date();
+                const hour = now.getHours();
+                
+                if (hour >= 6 && hour < 18) {
+                    // Morning theme
+                    morningTheme.disabled = false;
+                    eveningTheme.disabled = true;
+                    document.body.setAttribute('data-theme', 'morning');
+                    themeIcon.textContent = '☀️';
+                } else {
+                    // Evening theme
+                    morningTheme.disabled = true;
+                    eveningTheme.disabled = false;
+                    document.body.setAttribute('data-theme', 'evening');
+                    themeIcon.textContent = '🌙';
+                }
+            }
+        }
         
         function formatTime(timeStr) {
             // Just return the time string as-is, no parsing needed
@@ -58,7 +106,10 @@
         }
         
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', populateNews);
+        document.addEventListener('DOMContentLoaded', function() {
+            setTheme();
+            populateNews();
+        });
     </script>
 </body>
 </html> 

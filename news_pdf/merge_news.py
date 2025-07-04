@@ -15,16 +15,17 @@ from utils.read_write import read_text_file, write_text_file, read_json_file
 
 
 
-def merge_news_to_html(template, news_data):
+def merge_news_to_html(template, news_data, report_time='auto'):
 
     try:
         # Convert news data to JSON string for JavaScript
         news_json = json.dumps(news_data, ensure_ascii=False, indent=2)
         
-        # Replace the placeholder in the template
+        # Replace the placeholders in the template
         html_content = template.replace('{{NEWS_DATA}}', news_json)
+        html_content = html_content.replace('{{REPORT_TIME}}', report_time)
         
-        logger.info(f"Successfully merged {len(news_data)} news items into HTML template")
+        logger.info(f"Successfully merged {len(news_data)} news items into HTML template with {report_time} theme")
         return html_content
         
     except Exception as e:
@@ -77,7 +78,7 @@ async def html_to_pdf(html_file_path, pdf_file_path, css_file_path=None):
         return False
 
 
-def generate_html_report(input_json, template_file, output_file):
+def generate_html_report(input_json, template_file, output_file, report_time='auto'):
 
     # Read news data
     news_data = read_json_file(input_json)
@@ -92,7 +93,7 @@ def generate_html_report(input_json, template_file, output_file):
         return None
     
     # Merge data into template
-    merged_html = merge_news_to_html(template, news_data)
+    merged_html = merge_news_to_html(template, news_data, report_time)
     if merged_html is None:
         logger.error(f"Failed to merge news data into HTML template")
         return None
@@ -101,9 +102,9 @@ def generate_html_report(input_json, template_file, output_file):
     write_text_file(output_file, merged_html)
     return str(output_file)
 
-async def generate_pdf_report(input_json, template_file, output_file, pdf_file):
+async def generate_pdf_report(input_json, template_file, output_file, pdf_file, report_time='auto'):
     """Generate a PDF report from the HTML file."""
-    generate_html_report(input_json, template_file, output_file)
+    generate_html_report(input_json, template_file, output_file, report_time)
     await html_to_pdf(output_file, pdf_file)
 
 async def main():
@@ -115,18 +116,17 @@ async def main():
     input_file = "news_pdf/news_data.json"
     template_file = "news_pdf/template.html"
     output_file = "news_pdf/output.html"
-    css_file = "news_pdf/style.css"
     pdf_file = "news_pdf/output.pdf"
 
-    # Generate the HTML report
-    result = generate_html_report(input_file, template_file, output_file)
+    # Generate the HTML report with morning theme
+    result = generate_html_report(input_file, template_file, output_file, 'morning')
     
     if result:
         logger.info(f"📄 HTML Report saved to: {result}")
         
         # Generate PDF if Playwright is available
         logger.info("🔄 Converting HTML to PDF...")
-        if await html_to_pdf(output_file, pdf_file, css_file):
+        if await html_to_pdf(output_file, pdf_file):
             logger.info(f"📄 PDF Report saved to: {pdf_file}")
         else:
             logger.error("❌ Failed to generate PDF")

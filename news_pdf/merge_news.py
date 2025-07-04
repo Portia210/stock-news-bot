@@ -275,18 +275,18 @@ async def main():
     generator = NewsReportGenerator()
     
     # Get theme info
-    theme_info = generator.get_theme_info('morning')
+    theme_info = generator.get_theme_info('evening')
     logger.info(f"🌅 Using {theme_info['name']} theme ({theme_info['icon']})")
 
-    # Generate the HTML report with morning theme
-    result = generator.generate_html_report(input_file, output_file, 'morning')
+    # Generate the HTML report with evening theme
+    result = generator.generate_html_report(input_file, output_file, 'evening')
     
     if result:
         logger.info(f"📄 HTML Report saved to: {result}")
         
         # Generate PDF if Playwright is available
         logger.info("🔄 Converting HTML to PDF...")
-        if await generator.generate_pdf_report(input_file, output_file, pdf_file, 'morning'):
+        if await generator.generate_pdf_report(input_file, output_file, pdf_file, 'evening'):
             logger.info(f"📄 PDF Report saved to: {pdf_file}")
         else:
             logger.error("❌ Failed to generate PDF")

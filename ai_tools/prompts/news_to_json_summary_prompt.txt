@@ -22,11 +22,11 @@ Your task is to read the following economic news and generate a single, clear, d
 
 Example format:
 [
-  {{
+  {
     "date": "03/07/2025",
     "time": "morning",
     "message": "הודעה מפורטת על נושא החדשות."
-  }},
+  },
   ...
 ]
 

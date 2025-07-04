@@ -36,18 +36,15 @@ async def demo_themes():
     # Create generator instance
     generator = NewsReportGenerator()
     
-    # Generate morning theme
-    morning_info = generator.get_theme_info("morning")
-    logger.info(f"{morning_info['icon']} Generating {morning_info['name']} theme...")
-    await generator.generate_pdf_report(
-        input_json="news_pdf/demo_news.json",
-        output_file="news_pdf/demo_morning.html",
-        pdf_file="news_pdf/demo_morning.pdf",
-        report_time="morning"
-    )
+    time_settings = {
+        "morning": "morning",   
+        "evening": "evening",
+        "auto": "auto"
+    }
     
+
     # Generate evening theme
-    evening_info = generator.get_theme_info("evening")
+    evening_info = generator.get_theme_info(time_settings["evening"])
     logger.info(f"{evening_info['icon']} Generating {evening_info['name']} theme...")
     await generator.generate_pdf_report(
         input_json="news_pdf/demo_news.json",
@@ -56,16 +53,7 @@ async def demo_themes():
         report_time="evening"
     )
     
-    # Generate auto theme (based on current time)
-    auto_info = generator.get_theme_info("auto")
-    logger.info(f"🤖 Generating auto theme ({auto_info['name']})...")
-    await generator.generate_pdf_report(
-        input_json="news_pdf/demo_news.json",
-        output_file="news_pdf/demo_auto.html",
-        pdf_file="news_pdf/demo_auto.pdf",
-        report_time="auto"
-    )
-    
+
     logger.info("✅ Demo completed! Check the generated files:")
     logger.info("📄 Morning: news_pdf/demo_morning.html & news_pdf/demo_morning.pdf")
     logger.info("📄 Evening: news_pdf/demo_evening.html & news_pdf/demo_evening.pdf") 

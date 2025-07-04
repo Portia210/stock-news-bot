@@ -33,7 +33,7 @@
     },
     
     "holiday_calendar": {
-        "is_date_inline": false,
+        "is_date_inline": true,
         "date_format": "%B %#d, %Y",
         "table_selectors": {
             "date": {"selector": "td.date", "attribute": ["text"]},

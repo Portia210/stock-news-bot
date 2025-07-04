@@ -1,0 +1,14 @@
+    those are the last 24 hours of news from twitter, sort them by the time twitted and return them in a json format with the following fields: date, time, message (include the full message, not just the first line), link to tweet. convert the news messages to Hebrew, keep non israeli names or terms that hard to translate in english,
+    translate the news in a way that make sense as a news report.
+    remove new line marks from the messages.
+    the date and time will be taken from the tweet time.
+    the response will be in the following format:
+    [
+        {
+            "date": "03/07/2025",
+            "time": "14:07:30",
+            "message": "message",
+            "link": "link to tweet"
+        }
+    ]
+    use those translation instructions so you can translate the news better:

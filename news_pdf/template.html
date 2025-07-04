@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>דוח חדשות</h1>
+            <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+        </div>
+        
+        <div class="content">
+            <div id="news-container">
+                <!-- News items will be inserted here -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>נוצר ב- <span id="generation-time"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // This will be populated by the Python script
+        const newsData = {{NEWS_DATA}};
+        
+        function formatTime(timeStr) {
+            // Just return the time string as-is, no parsing needed
+            return timeStr;
+        }
+        
+        function populateNews() {
+            const container = document.getElementById('news-container');
+            const generationTime = document.getElementById('generation-time');
+            
+            // Set generation time
+            generationTime.textContent = new Date().toLocaleString();
+            
+            if (newsData.length > 0) {
+                // Populate news items
+                newsData.forEach(item => {
+                    const newsDiv = document.createElement('div');
+                    newsDiv.className = 'news-item';
+                    newsDiv.innerHTML = `
+                        <div class="news-header">
+                            <div class="news-time">${formatTime(item.time)}</div>
+                            <a href="${item.link}" class="news-link" target="_blank">צפה במקור</a>
+                        </div>
+                        <div class="news-message">${item.message}</div>
+                    `;
+                    container.appendChild(newsDiv);
+                });
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', populateNews);
+    </script>
+</body>
+</html> 

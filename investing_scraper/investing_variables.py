@@ -7,7 +7,7 @@ class Countries:
 
 class TimeZones:
     israel = "17"
-    eastern_time = "8"
+    eastern_us = "8"
 
 class Importance:
     low = "1"

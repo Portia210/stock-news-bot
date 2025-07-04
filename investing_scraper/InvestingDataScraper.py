@@ -58,15 +58,15 @@ class InvestingDataScraper:
         def proccess_tr(tr, table_selectors):
             """Extract data from a single row"""
             row_data = {}
-            for key, value in table_selectors.items():
-                if key == "date":
+            for item_name, selector in table_selectors.items():
+                if item_name == "date":
                     continue
                 try:
-                    data_element = tr.select_one(value["selector"])
+                    data_element = tr.select_one(selector["selector"])
                     if data_element:
-                        row_data[key] = self.get_element_attirbutes(data_element, value["attribute"])
+                        row_data[item_name] = self.get_element_attirbutes(data_element, selector["attribute"])
                 except Exception as e:
-                    logger.error(f"Error processing {key}: {str(e)}")
+                    logger.error(f"Error processing {item_name}: {str(e)}")
             return row_data
         
         table_soup = BeautifulSoup(table_html, 'html.parser')   
@@ -80,11 +80,15 @@ class InvestingDataScraper:
             date_element = row.select_one(table_selectors['date']['selector'])
             new_date = self.get_element_attirbutes(date_element, table_selectors['date']['attribute']) if date_element else None
 
+
+            # add the previous events to the matching date
             if new_date:
                 if current_events:
                     events_by_date[current_date] = current_events
                     current_events = []
                 current_date = new_date
+                
+            # extract the events if if not a date tr, or if the date is inline
             if not new_date or table_structure["is_date_inline"]:
                 proccessed_row = proccess_tr(row, table_selectors)
                 if proccessed_row:

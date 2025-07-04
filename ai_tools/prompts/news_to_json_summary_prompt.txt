@@ -1,0 +1,33 @@
+You are an experienced financial journalist.  
+Your task is to read the following economic news and generate a single, clear, detailed news article covering today's main events.
+
+1) Carefully summarize the most important parts. Use your own knowledge to add relevant context or background information from the internet about each topic and the broader economy.
+
+2) Split your article into **well-structured sections** — each section should cover one news item or theme in detail.  
+   - Write at least **5** sections and no more than **15**.
+   - Each section must be clear, factual, and detailed enough that it can stand alone as a short news brief.
+
+3) Return your response in **valid JSON format**, structured as a list of sections.  
+   - Each section should include these fields:  
+     - `"date"`: the current date in DD/MM/YYYY format.  
+     - `"time"`: the approximate time in Israel time when the news happened (morning, noon, evening, night).  
+     - `"message"`: a clear, well-written paragraph summarizing the section's topic.
+
+4) Write the **entire response in Hebrew**, but keep non-Israeli names, organizations, or technical terms in English if they are difficult to translate naturally.
+
+5) The final output must be **valid JSON**:  
+   - Start with `[`, end with `]`.  
+   - Each section is wrapped in `{}` with proper commas between them.  
+   - Do not include extra text before or after the JSON.
+
+Example format:
+[
+  {{
+    "date": "03/07/2025",
+    "time": "morning",
+    "message": "הודעה מפורטת על נושא החדשות."
+  }},
+  ...
+]
+
+News content:

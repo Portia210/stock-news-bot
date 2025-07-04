@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>דוח חדשות</h1>
+            <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+        </div>
+        
+        <div class="content">
+            <div id="news-container">
+                <!-- News items will be inserted here -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>נוצר ב- <span id="generation-time"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // This will be populated by the Python script
+        const newsData = [
+  {
+    "date": "04/07/2025",
+    "time": "afternoon",
+    "message": "דוח המשרות לחודש יוני חושף תוספת של 147,000 משרות בארה\"ב, העולה על תחזיות האנליסטים של 110,000. שיעור האבטלה ירד לשיעור נמוך של 4.1%, לעומת צפי של 4.3%. משכורות השעתיות הממוצעות עלו ב-0.22%, ותוספת בשכר השנתי עומדת על 3.71%. המספרים מראים על שוק עבודה חיובי למרות האתגרים המאקרו-כלכליים."
+  },
+  {
+    "date": "04/07/2025",
+    "time": "afternoon",
+    "message": "הביטקוין טיפס לשיא של שלושה שבועות בערך של 110,279 דולר, בעקבות זרימת כספים לקרנות ETF והקלה בחששות מאקרו-כלכליים. דוח ה-ADP והתאוששות המסחר עם וייטנאם חיזקו את תקוות הקיצוץ בריבית, דבר שהעלה את התיאבון לסיכון בשוק."
+  },
+  {
+    "date": "04/07/2025",
+    "time": "afternoon",
+    "message": "נשיא ארה\"ב, דונלד טראמפ, הודיע על תוכניות לקיים טקס חתימה למיסים ביום שישי ב-5:00 לפנות ערב, כחלק מעדכון חוצי-מגזרים במיסוי ובתקציב שכולל גם שיחות טלפון עם נשיא רוסיה פוטין ועם נשיא אוקראינה זלנסקי."
+  },
+  {
+    "date": "04/07/2025",
+    "time": "afternoon",
+    "message": "איראן פרסמה הצהרות בנוגע למדיניות העשרה שלה, כשהיא מסרבת להפסיק את העשרת האורניום, אך מוכנה לדון בהיקף תוכנית העשרה שלה עם גורמים בינלאומיים. נאמר שמדינות רבות ישתתפו בשיחות הקרובות באוסלו בנושא הגרעין."
+  },
+  {
+    "date": "04/07/2025",
+    "time": "afternoon",
+    "message": "גרמניה נערכת להגדיל את כוחות נאט\"ו שלה עם הזמנת טנקים בשווי 25 מיליארד אירו. זהו צעד חלק מהיערכות גדולה יותר לביטחון האירופי נוכח ההתרחשויות באוקראינה והמעורבות הרוסית במזרח אירופה."
+  }
+];
+        
+        function formatTime(timeStr) {
+            // Just return the time string as-is, no parsing needed
+            return timeStr;
+        }
+        
+        function populateNews() {
+            const container = document.getElementById('news-container');
+            const generationTime = document.getElementById('generation-time');
+            
+            // Set generation time
+            generationTime.textContent = new Date().toLocaleString();
+            
+            if (newsData.length > 0) {
+                // Populate news items
+                newsData.forEach(item => {
+                    const newsDiv = document.createElement('div');
+                    newsDiv.className = 'news-item';
+                    newsDiv.innerHTML = `
+                        <div class="news-header">
+                            <div class="news-time">${formatTime(item.time)}</div>
+                            <a href="${item.link}" class="news-link" target="_blank">צפה במקור</a>
+                        </div>
+                        <div class="news-message">${item.message}</div>
+                    `;
+                    container.appendChild(newsDiv);
+                });
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', populateNews);
+    </script>
+</body>
+</html> 

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from utils.logger import logger
 from utils.message_handler import MessageHandler, get_message_handler
 from ai_tools.chat_gpt import AIInterpreter
-from news_pdf.merge_news import generate_html_report, generate_pdf_report
+from news_pdf.merge_news import NewsReportGenerator
 import asyncio
 from config import config
 from utils.read_write import read_text_file, write_json_file, write_text_file
@@ -72,19 +72,29 @@ async def process_and_send_news_report():
         # Step 3: Generate PDF report
         logger.info("📄 Generating PDF report...")
         
+        # Create news report generator
+        generator = NewsReportGenerator()
+        
         # Determine report time based on current hour
         from datetime import datetime
         current_hour = datetime.now().hour
         report_time = 'morning' if 6 <= current_hour < 18 else 'evening'
-        logger.info(f"🌅 Using {report_time} theme (current hour: {current_hour})")
         
-        await generate_pdf_report(
+        # Get theme info for logging
+        theme_info = generator.get_theme_info(report_time)
+        logger.info(f"{theme_info['icon']} Using {theme_info['name']} theme (current hour: {current_hour})")
+        
+        # Generate PDF report
+        success = await generator.generate_pdf_report(
             input_json="news_pdf/news_data.json", 
-            template_file="news_pdf/template.html", 
             output_file="news_pdf/output.html", 
             pdf_file="news_pdf/output.pdf",
             report_time=report_time
         )
+        
+        if not success:
+            logger.error("❌ Failed to generate PDF report")
+            return
         
         # Step 4: Send report to Discord channel
         logger.info("📤 Sending report to Discord channel...")

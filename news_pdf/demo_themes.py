@@ -5,7 +5,7 @@ Demonstrates how to generate reports with different themes.
 """
 
 import asyncio
-from merge_news import generate_html_report, generate_pdf_report
+from merge_news import NewsReportGenerator
 from utils.logger import logger
 
 async def demo_themes():
@@ -33,31 +33,34 @@ async def demo_themes():
     logger.info("🎨 Theme System Demo")
     logger.info("=" * 50)
     
+    # Create generator instance
+    generator = NewsReportGenerator()
+    
     # Generate morning theme
-    logger.info("🌅 Generating morning theme...")
-    await generate_pdf_report(
+    morning_info = generator.get_theme_info("morning")
+    logger.info(f"{morning_info['icon']} Generating {morning_info['name']} theme...")
+    await generator.generate_pdf_report(
         input_json="news_pdf/demo_news.json",
-        template_file="news_pdf/template.html", 
         output_file="news_pdf/demo_morning.html",
         pdf_file="news_pdf/demo_morning.pdf",
         report_time="morning"
     )
     
     # Generate evening theme
-    logger.info("🌙 Generating evening theme...")
-    await generate_pdf_report(
+    evening_info = generator.get_theme_info("evening")
+    logger.info(f"{evening_info['icon']} Generating {evening_info['name']} theme...")
+    await generator.generate_pdf_report(
         input_json="news_pdf/demo_news.json",
-        template_file="news_pdf/template.html",
         output_file="news_pdf/demo_evening.html", 
         pdf_file="news_pdf/demo_evening.pdf",
         report_time="evening"
     )
     
     # Generate auto theme (based on current time)
-    logger.info("🤖 Generating auto theme...")
-    await generate_pdf_report(
+    auto_info = generator.get_theme_info("auto")
+    logger.info(f"🤖 Generating auto theme ({auto_info['name']})...")
+    await generator.generate_pdf_report(
         input_json="news_pdf/demo_news.json",
-        template_file="news_pdf/template.html",
         output_file="news_pdf/demo_auto.html",
         pdf_file="news_pdf/demo_auto.pdf",
         report_time="auto"

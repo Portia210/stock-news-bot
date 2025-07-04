@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Report</title>
+    <!-- Main styles -->
     <link rel="stylesheet" href="style.css">
+    <!-- Theme overrides -->
+    <link rel="stylesheet" href="morning.css" id="morning-theme">
+    <link rel="stylesheet" href="evening.css" id="evening-theme" disabled>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>דוח חדשות</h1>
-            <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+            <div class="header-content">
+                <div class="theme-icon" id="theme-icon">☀️</div>
+                <div class="header-text">
+                    <h1>דוח חדשות</h1>
+                    <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+                </div>
+            </div>
         </div>
         
         <div class="content">
@@ -30,54 +39,68 @@
   {
     "date": "04/07/2025",
     "time": "afternoon",
-    "message": "חברת ניהול הנכסים הגדולה באירופה, Amundi, מזהירה כי המדיניות החדשה של מטבעות יציבים בארה\"ב עלולה לסכן את מערכת התשלומים העולמית. המטבעות היציבים, שעוצמתם נובעת מכך שהם מגובים בנכסים, נתפסים כמאיימים על הסדר הפיננסי הגלובלי."
+    "message": "הנתונים הכלכליים החשובים של חודש יוני בארה\"ב נחכו תשומת לב משמעותית. מספר העובדים שאינם בתחום החקלאות (Nonfarm Payrolls) עלה ב-147,000, מעל התחזיות שהיו סביב 110,000. שיעור האבטלה ירד ל-4.1% והיה נמוך מהתחזיות שהסתובבו סביב 4.3%. המשכורות השעתיות הממוצעות עלו ב-0.22%, או $0.08 ל-$36.3."
   },
   {
     "date": "04/07/2025",
     "time": "afternoon",
-    "message": "הנשיא לשעבר טראמפ מתחייב למגר את הטבות המס על אנרגיות מתחדשות כגון שמש ורוח. צעד זה עשוי להשפיע על השוק המתקדם של אנרגיה מתחדשת בארה\"ב ולמעשה עלול לעודד חזרה לשימוש במקורות אנרגיה מסורתיים."
+    "message": "תביעות האבטלה בארה\"ב ירדו ב-4,000 ל-233,000 לשבוע המסתיים ב-28 ביוני. המספר הכולל של התביעות הממשיכות נשאר ללא שינוי ב-1,964,000. הנתונים מספקים תמונה חיובית יחסית של שוק העבודה, ותגובת השוק הייתה יציאה מהימור להקטנת ריבית על ידי הפד ביולי."
   },
   {
     "date": "04/07/2025",
     "time": "afternoon",
-    "message": "ביטקוין הגיע לשיא של שלושה שבועות ומחירו הגיע ל-110,279 דולר. הסיבות לכך הן שממשיכות ההשקעות ב-ETF ושמשקיעים מצפים להפחתת ריבית, מה שמגביר את התיאבון לסיכון."
+    "message": "באירופה, נשיאת האיחוד האירופי, אורזולה פון דר ליין, בישרה שהאיחוד מוכן לעסקה עם ארצות הברית בנוגע למכסים. ההודעה מגיעה בתקופה של מתיחות מסחרית בינלאומית שנובעת מהגבלות וצעדים משני הצדדים, והיא עשויה לסלול את הדרך להקלה נוספת בסחר."
   },
   {
     "date": "04/07/2025",
     "time": "afternoon",
-    "message": "דו\"ח חודשי על תעסוקה בחקלאות בארה\"ב מצביע על עלייה מפתיעה ל-147,000 משרות ביוני, מעל הציפיות של 110,000. שיעור האבטלה ירד ל-4.1% וחיזק את הסבירות להשארות הריבית ללא שינוי לפחות בטווח הקצר."
+    "message": "מחירי הזהב ירדו ב-1% למחיר של $3,323.06 לאונקיה, לאחר שהגיבו לשינויים בכלכלה העולמית. ירידת מחירי הזהב מתרחשת בתקופה בה ישנם תחזיות לאינפלציה מוגברת בארצות הברית והערכות לגבי מלחמות סחר פוטנציאליות."
   },
   {
     "date": "04/07/2025",
     "time": "afternoon",
-    "message": "נראה שהיחסים הכלכליים בין ארה\"ב ואיחוד האירופי עשויים להשתפר, כאשר נשיאת הנציבות האירופית, אורסולה פון דר ליין, מציינת כי הם מוכנים להסכם בכל הנוגע למכסים עם ארה\"ב."
-  },
-  {
-    "date": "04/07/2025",
-    "time": "afternoon",
-    "message": "הזהב סובל מירידת מחירים של כ-1%, כשהוא נסחר ב-3,323.06 דולר לאונקיה. ירידה זו עשויה להצביע על ירידה בביקוש לנכסים בטוחים או בשל שינויי מסחר בינלאומיים."
-  },
-  {
-    "date": "04/07/2025",
-    "time": "afternoon",
-    "message": "בורסת S&P 500 עלתה ב-1.72% במהלך השבוע, Nasdaq ב-1.62%, וה-Dow ב-2.3%. העליות מצביעות על אופטימיות גוברת בשוק למרות חששות מתמשכים בסביבת הכלכלה הגלובלית."
-  },
-  {
-    "date": "04/07/2025",
-    "time": "afternoon",
-    "message": "המסחר בחוזים עתידיים מראה חשש מוגבר מהאפשרות להפחתה בריבית של הפדרל ריזרב עד ספטמבר. עם זאת, לאחר דיווחי המשרות, ירדה הסבירות להפחתה זו ביולי."
-  },
-  {
-    "date": "04/07/2025",
-    "time": "afternoon",
-    "message": "הרפובליקה האיסלאמית של איראן נותרת מחויבת לאמנה למניעת הפצת נשק גרעיני (NPT), ומצהירה על כך שהיא ממשיכה לפעול בהתאם להסכמים הבינלאומיים שעליהם היא חתומה."
-  },
-  {
-    "date": "04/07/2025",
-    "time": "evening",
-    "message": "שיחות גרעין בין הממשלות האמריקנית והאיראנית מתוכננות לאוסלו בשבוע הבא. המפגשים צפויים לדון בהיקף תוכנית ההעשרה של איראן כמענה לחששות בינלאומיים מההשלכות הגרעיניות הפוטנציאליות."
+    "message": "באיראן, משרד החוץ הודיע כי המדינה מחויבת להסכם NPT והסכמי הפיקוח הקשורים לו, אך לא מתכוונת להפסיק את העשרת האורניום. על פי דיווחים, מתקיימות תוכניות לשיחות נוספות עם ארצות הברית על נושאים גרעיניים באוסלו בשבוע הבא."
   }
 ];
+        const reportTime = "morning"; // morning or evening
+        
+        function setTheme() {
+            const morningTheme = document.getElementById('morning-theme');
+            const eveningTheme = document.getElementById('evening-theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (reportTime === 'morning') {
+                // Morning theme
+                morningTheme.disabled = false;
+                eveningTheme.disabled = true;
+                document.body.setAttribute('data-theme', 'morning');
+                themeIcon.textContent = '☀️';
+            } else if (reportTime === 'evening') {
+                // Evening theme
+                morningTheme.disabled = true;
+                eveningTheme.disabled = false;
+                document.body.setAttribute('data-theme', 'evening');
+                themeIcon.textContent = '🌙';
+            } else {
+                // Auto-detect based on current time
+                const now = new Date();
+                const hour = now.getHours();
+                
+                if (hour >= 6 && hour < 18) {
+                    // Morning theme
+                    morningTheme.disabled = false;
+                    eveningTheme.disabled = true;
+                    document.body.setAttribute('data-theme', 'morning');
+                    themeIcon.textContent = '☀️';
+                } else {
+                    // Evening theme
+                    morningTheme.disabled = true;
+                    eveningTheme.disabled = false;
+                    document.body.setAttribute('data-theme', 'evening');
+                    themeIcon.textContent = '🌙';
+                }
+            }
+        }
         
         function formatTime(timeStr) {
             // Just return the time string as-is, no parsing needed
@@ -109,7 +132,10 @@
         }
         
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', populateNews);
+        document.addEventListener('DOMContentLoaded', function() {
+            setTheme();
+            populateNews();
+        });
     </script>
 </body>
 </html> 
